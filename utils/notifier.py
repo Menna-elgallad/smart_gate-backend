@@ -12,7 +12,7 @@ headers = {
 }
 data = {
     "notification": {
-        "icon": "http://localhost:3000/images/logo.png"
+        "icon": "https://board-smartgate.onrender.com/images/logo.png"
     },
 }
 
@@ -25,7 +25,7 @@ def send_notification(gate_id, plate, message=None, title=None):
         body=message or f"Unknown Car Trying access \n plate : {plate} at gate : {gate.name} ", title=title or "Car Access")
     if users is None or len(users) == 0:
         return "User not found"
-    url = "http://localhost:3000/camera"
+    url = "https://board-smartgate.onrender.com/camera"
 
     for user in users:
         print(user)
