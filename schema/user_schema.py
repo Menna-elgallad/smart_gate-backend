@@ -55,9 +55,10 @@ class Login(graphene.Mutation):
             print(kwargs)
             if 'fcmToken' in kwargs:
                 tokens = user.fcm_tokens or []
-                print(tokens)
                 tokens.append(kwargs['fcmToken'])
-                UserModel.update(user, fcm_tokens=tokens)
+                db.session.query(UserModel).filter_by(
+                    username=user.username).update({'fcm_tokens': tokens})
+                db.session.commit()
             return Login(access_token=create_access_token(user.username), user=user)
         else:
             raise Exception('wrong credentials')
